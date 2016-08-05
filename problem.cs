@@ -12,63 +12,60 @@
   3. Any non-alphabetic character in the input string should appear in the output string in its original relative location
   */
 
-    static string shortenString(string input) {
-      // Initialize variables
-      string shortenedString = string.Empty; // variable to keep entire return variable
+  static string shortenString(string input) {
+    // Initialize variables
+    string shortenedString = string.Empty; // variable to keep entire return variable
 
-      string tempWord = string.Empty; //store alphabetic word as built
-      string nonAlpha = string.Empty; //store non-alphabetic word as built
+    string tempWord = string.Empty; //store alphabetic word as built
+    string nonAlpha = string.Empty; //store non-alphabetic word as built
 
-      bool buildingWord = false;
+    bool buildingWord = false;
 
-      List<string> words = new List<string>();
+    List<string> words = new List<string>();
 
-      // Iterate characters in input, sorting into words and non-words
-      foreach(char c in input){
-        if (Char.IsLetter(c)){
-          buildingWord = true;
-        }
-        else{
-          buildingWord = false;
-        }
-
-        if(buildingWord){
-          //if non-word has been built, store it
-          if (!nonAlpha.Equals(string.Empty)){
-            words.Add(nonAlpha);
-            tempWord = string.Empty;
-          }
-
-          nonAlpha = string.Empty;
-
-          tempWord = String.Format("{0}{1}",tempWord,c.ToString());
-        }
-        else //buildingWord is false, so character was not alphabetic
-        {
-          // if word has been built, get #characters in middle, recombine chars & store result to list
-          if (!tempWord.Equals(string.Empty)){
-            string wordToAdd = string.Empty;
-            char last = tempWord[-1];
-            char first = tempWord[0];
-            string mid = tempWordMid.Substring(1, tempWord.Length - 1);
-            int countOfDistinctLetters = mid.Distinct();
-            wordToAdd = String.Format("{0}{1}{2}",first.ToString(),countOfDistinctLetters.ToString(),last.ToString());
-
-            words.Add(wordToAdd);
-            }
-
-            tempWord = string.Empty;
-            wordFirstLetter = string.Empty;
-            wordLastLetter = string.Empty;
-            tempWordMid = string.Empty;
-
-            nonAlpha = String.Format("{0}{1}",nonAlpha,c.ToString());
-        }
+    // Iterate characters in input, sorting into words and non-words
+    foreach(char c in input){
+      if (Char.IsLetter(c)){
+        buildingWord = true;
+      }
+      else{
+        buildingWord = false;
       }
 
-      // Recombine words & non-words
-      shortenedString = String.Join("",words);
+      if(buildingWord){
+        //if non-word has been built, store it
+        if (!nonAlpha.Equals(string.Empty)){
+          words.Add(nonAlpha);
+          tempWord = string.Empty;
+        }
 
-      // Return output
-      return shortenedString;
+        nonAlpha = string.Empty;
+
+        tempWord = String.Format("{0}{1}",tempWord,c.ToString());
+      }
+      else //buildingWord is false, so character was not alphabetic
+      {
+        // if word has been built, get # of characters in middle, recombine chars & store result to list
+        if (!tempWord.Equals(string.Empty)){
+          string wordToAdd = string.Empty;
+          char last = tempWord.Last();
+          char first = tempWord.First();
+          string mid = tempWord.Substring(1, Convert.ToInt32(tempWord.Length) - 2);
+          int countOfDistinctLetters = mid.Distinct();
+          wordToAdd = String.Format("{0}{1}{2}",first.ToString(),countOfDistinctLetters.ToString(),last.ToString());
+
+          words.Add(wordToAdd);
+          }
+
+          tempWord = string.Empty;
+
+          nonAlpha = String.Format("{0}{1}",nonAlpha,c.ToString());
+      }
     }
+
+    // Recombine words & non-words
+    shortenedString = String.Join("",words);
+
+    // Return output
+    return shortenedString;
+  }
