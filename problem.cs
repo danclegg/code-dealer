@@ -42,22 +42,22 @@
 
         if(buildingWord){
           //if non-word has been built, store it
-          if (nonAlpha != ""){
+          if (nonAlpha.Length > 0){
             nonWords.Enqueue(nonAlpha);
             insertions.Add(0);
 
             // We're starting a new word, so keep the first character
             wordFirstLetter = c.ToString();
           }
-          nonAlpha = "";
-          tempWord += c.ToString();
+          nonAlpha = String.Empty;
+          tempWord = String.Format("{0}{1}",tempWord,c.ToString());
           wordLastLetter = c.ToString();
         }
         else
         {
           // if word has been built, get #characters in middle, recombine chars & store result to list
-          if (tempWord != ""){
-            string wordToQueue = string.Format("{0}{1}{2}",wordFirstLetter.ToString(),tempWordMid.Distinct().ToString(),wordLastLetter.ToString());
+          if (tempWord.Length > 0){
+            string wordToQueue = String.Format("{0}{1}{2}",wordFirstLetter.ToString(),tempWordMid.Distinct().ToString(),wordLastLetter.ToString());
             words.Enqueue(wordToQueue);
             insertions.Add(1);
             }
@@ -67,7 +67,7 @@
             wordLastLetter = String.Empty;
             tempWordMid = String.Empty;
 
-            nonAlpha += c.ToString();
+            nonAlpha = String.Format("{0}{1}",nonAlpha,c.ToString());
         }
       }
 
