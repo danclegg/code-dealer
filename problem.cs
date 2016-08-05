@@ -34,7 +34,7 @@
 
       if(buildingWord){
         //if non-word has been built, store it
-        if (!nonAlpha.Equals(string.Empty)){
+        if (!String.IsNullOrEmpty(nonAlpha)){
           words.Add(nonAlpha);
           tempWord = string.Empty;
         }
@@ -46,11 +46,12 @@
       else //buildingWord is false, so character was not alphabetic
       {
         // if word has been built, get # of characters in middle, recombine chars & store result to list
-        if (!tempWord.Equals(string.Empty)){
+        if (!String.IsNullOrEmpty(tempWord)){
           string wordToAdd = string.Empty;
+          int lengthOfWord = tempWord.Length;
           char last = tempWord.Last();
           char first = tempWord.First();
-          string mid = tempWord.Substring(1, Convert.ToInt32(tempWord.Length) - 2);
+          string mid = tempWord.Substring(1, lengthOfWord - 2);
           int countOfDistinctLetters = mid.Distinct();
           wordToAdd = String.Format("{0}{1}{2}",first.ToString(),countOfDistinctLetters.ToString(),last.ToString());
 
