@@ -14,14 +14,14 @@
 
     static string shortenString(string input) {
       // Initialize variables
-      string shortenedString = "";
+      string shortenedString = String.Empty;
 
-      string tempWord = ""; //store alphabetic word as built
-      char wordFirstLetter = ''; //keep
-      char wordLastLetter = '';
-      string tempWordMid = "";
+      string tempWord = String.Empty; //store alphabetic word as built
+      string wordFirstLetter = String.Empty; //keep first letter of real words
+      string wordLastLetter = String.Empty; // keep last letter of real words
+      string tempWordMid = String.Empty;
 
-      string nonAlpha = ""; //store non-alphabetic word as built
+      string nonAlpha = String.Empty; //store non-alphabetic word as built
 
       bool buildingWord = false;
 
@@ -47,11 +47,11 @@
             insertions.Add(0);
 
             // We're starting a new word, so keep the first character
-            wordFirstLetter = c;
+            wordFirstLetter = c.ToString();
           }
           nonAlpha = "";
           tempWord += c.ToString();
-          wordLastLetter = c;
+          wordLastLetter = c.ToString();
         }
         else
         {
@@ -62,10 +62,10 @@
             insertions.Add(1);
             }
 
-            tempWord = "";
-            wordFirstLetter = '';
-            wordLastLetter = '';
-            tempWordMid = "";
+            tempWord = String.Empty;
+            wordFirstLetter = String.Empty;
+            wordLastLetter = String.Empty;
+            tempWordMid = String.Empty;
 
             nonAlpha += c.ToString();
         }
