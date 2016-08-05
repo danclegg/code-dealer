@@ -83,7 +83,7 @@
       }
 
       // Recombine words & non-words
-      for (int counter = 0; counter < insertions.Count(); counter++){
+      for (int counter = 0; counter < insertions.Count; counter++){
         string word = "";
         if(insertions[counter] == 0){
           shortenedString = String.Format("{0}{1}",shortenedString,nonWords.Dequeue());
