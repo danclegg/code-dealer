@@ -86,10 +86,10 @@
       for (int counter = 0; counter < insertions.Count(); counter++){
         string word = "";
         if(insertions[counter] == 0){
-          shortenedString += nonWords.Dequeue();
+          shortenedString = String.Format("{0}{1}",shortenedString,nonWords.Dequeue());
         }
         else {
-          shortenedString += words.Dequeue();
+          shortenedString = String.Format("{0}{1}",shortenedString,words.Dequeue());
         }
       }
 
