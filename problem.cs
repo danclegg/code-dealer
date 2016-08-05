@@ -14,7 +14,7 @@
 
     static string shortenString(string input) {
       // Initialize variables
-      string shortenedString = String.Empty;
+      string shortenedString = String.Empty; // variable to keep entire return variable
 
       string tempWord = String.Empty; //store alphabetic word as built
       string wordFirstLetter = String.Empty; //keep first letter of real words
@@ -48,16 +48,27 @@
 
             // We're starting a new word, so keep the first character
             wordFirstLetter = c.ToString();
+            tempWordMid = "";
           }
           nonAlpha = String.Empty;
-          tempWord = String.Format("{0}{1}",tempWord,c.ToString());
+
+          //if it's not the first character of the word and we're building the string, add it to the tempWordMid
+          if (wordFirstLetter.Length > 0)
+          {
+            tempWordMid = String.Format("{0}{1}", tempWordMid,c.ToString());
+          }
+
+          //tempWord = String.Format("{0}{1}",tempWord,c.ToString());
           wordLastLetter = c.ToString();
         }
-        else
+        else //buildingWord is false, so character was not alphabetic
         {
           // if word has been built, get #characters in middle, recombine chars & store result to list
           if (tempWord.Length > 0){
-            string wordToQueue = String.Format("{0}{1}{2}",wordFirstLetter.ToString(),tempWordMid.Distinct().ToString(),wordLastLetter.ToString());
+            //remove last character from tempWordMid
+            string mid = tempWordMid.Substring(0, tempWordMid.Length - 1);
+            string wordToQueue = String.Format("{0}{1}{2}",wordFirstLetter.ToString(),mid.Distinct().ToString(),wordLastLetter.ToString());
+
             words.Enqueue(wordToQueue);
             insertions.Add(1);
             }
